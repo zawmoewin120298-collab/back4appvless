@@ -1,11 +1,11 @@
-FROM teddysun/xray:latest
-
-# Config ဖိုင်ကို သတ်မှတ်ထားတဲ့ နေရာထဲ ထည့်မယ်
-COPY config.json /etc/xray/config.json
-
-# Port 8080 ကို ဖွင့်ပေးမယ် (Back4app default)
+FROM alpine:latest
+RUN apk add --no-cache wget tar
+WORKDIR /app
+# 下载 sing-box 官方程序
+RUN wget https://github.com/SagerNet/sing-box/releases/download/v1.10.1/sing-box-1.10.1-linux-amd64.tar.gz && \
+    tar -zxvf sing-box-1.10.1-linux-amd64.tar.gz && \
+    mv sing-box-1.10.1-linux-amd64/sing-box . && \
+    rm -rf sing-box-1.10.1-linux-amd64*
+COPY config.json .
 EXPOSE 8080
-
-# Xray ကို စတင် Run မယ်
-CMD ["xray", "-config", "/etc/xray/config.json"]
-
+CMD ["./sing-box", "run", "-c", "config.json"]
