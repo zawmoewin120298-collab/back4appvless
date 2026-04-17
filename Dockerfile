@@ -1,6 +1,9 @@
 FROM alpine:latest
 
 ENV PORT=8080
+# Cloudflare Token ကို Environment Variable အနေနဲ့ ထည့်ထားနိုင်ပါတယ်
+ENV TUNNEL_TOKEN=YOUR_TOKEN_HERE
+
 RUN apk add --no-cache curl unzip
 
 # V2Ray တင်ခြင်း
@@ -17,5 +20,6 @@ RUN curl -L -o /usr/local/bin/cloudflared https://github.com/cloudflare/cloudfla
 
 EXPOSE 8080
 
-# V2Ray ရော Cloudflare Tunnel ရော တစ်ပြိုင်နက် run မယ်
-CMD /v2ray/v2ray run -config /v2ray/config.json & cloudflared tunnel --url http://localhost:8080
+# Token ကို အသုံးပြုပြီး Tunnel ကို run မယ်
+CMD /v2ray/v2ray run -config /v2ray/config.json & cloudflared tunnel --no-autoupdate run --token ${TUNNEL_TOKEN}
+
