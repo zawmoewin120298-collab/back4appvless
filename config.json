@@ -1,17 +1,27 @@
 {
-  "listen": ":8080",
-  "protocol": "vless",
-  "tag": "vless-in",
-  "settings": {
-    "clients": [
-      {
-        "id": "f2e17b4d-22fd-44a4-90db-40649717be8e"
+  "inbounds": [
+    {
+      "type": "vless",
+      "tag": "vless-in",
+      "listen": "::",
+      "listen_port": 8080,
+      "users": [
+        {
+          "uuid": "f2e17b4d-22fd-44a4-90db-40649717be8e"
+        }
+      ],
+      "transport": {
+        "type": "ws",
+        "path": "/speedtest",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
       }
-    ],
-    "decryption": "none"
-  },
-  "transport": {
-    "type": "ws",
-    "path": "/speedtest" 
-  }
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "direct",
+      "tag": "direct"
+    }
+  ]
 }
