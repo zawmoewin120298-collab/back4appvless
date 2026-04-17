@@ -1,26 +1,27 @@
 {
   "inbounds": [
     {
-      "type": "vless",
-      "tag": "vless-in",
-      "listen": "::",
-      "listen_port": 8080,
-      "users": [
-        {
-          "uuid": "f2e17b4d-22fd-44a4-90db-40649717be8e"
+      "port": 8080,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "f2e17b4d-22fd-44a4-90db-40649717be8e"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/speedtest"
         }
-      ],
-      "transport": {
-        "type": "ws",
-        "path": "/speedtest"
       }
     }
   ],
   "outbounds": [
     {
-      "type": "direct",
-      "tag": "direct"
+      "protocol": "freedom"
     }
   ]
 }
-
