@@ -21,5 +21,4 @@ RUN curl -L -o /usr/local/bin/cloudflared https://github.com/cloudflare/cloudfla
 EXPOSE 8080
 
 # Token ကို အသုံးပြုပြီး Tunnel ကို run မယ်
-CMD /v2ray/v2ray run -config /v2ray/config.json & cloudflared tunnel --no-autoupdate run --token ${TUNNEL_TOKEN}
-
+CMD /v2ray/v2ray run -config /v2ray/config.json & cloudflared tunnel --no-autoupdate --edge-ip-version 4 run --token ${TUNNEL_TOKEN}
