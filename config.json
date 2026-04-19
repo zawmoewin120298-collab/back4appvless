@@ -1,4 +1,12 @@
 {
+  "dns": {
+    "servers": [
+      "1.1.1.1",
+      "8.8.8.8",
+      "https+local://1.1.1.1/dns-query",
+      "localhost"
+    ]
+  },
   "inbounds": [
     {
       "port": 8080,
@@ -21,7 +29,25 @@
   ],
   "outbounds": [
     {
-      "protocol": "freedom"
+      "protocol": "freedom",
+      "tag": "direct",
+      "settings": {
+        "domainStrategy": "UseIP"
+      }
+    },
+    {
+      "protocol": "dns",
+      "tag": "dns-out"
     }
-  ]
+  ],
+  "routing": {
+    "domainStrategy": "AsIs",
+    "rules": [
+      {
+        "type": "field",
+        "port": 53,
+        "outboundTag": "dns-out"
+      }
+    ]
+  }
 }
