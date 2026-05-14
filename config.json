@@ -22,7 +22,7 @@
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "/speedtest"
+          "path": "/speedtest.net"
         }
       }
     }
